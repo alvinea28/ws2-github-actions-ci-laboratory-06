@@ -1,6 +1,6 @@
 # Laboratory 06 · GitHub Actions and reusable validation
 
-**Repository:** [alvinea28/ws2-github-actions-ci-laboratory-06](https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06) · **Recommended order:** 06 of 08 · **Time:** 75–105 minutes
+**Public source template (not the clone URL after copying):** [alvinea28/ws2-github-actions-ci-laboratory-06](https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06) · **Recommended order:** 06 of 08 · **Time:** 75–105 minutes
 
 > [!NOTE]
 > **This laboratory is independent.** No earlier repository required. A complete module and workflow starters are included; all CI remains credential-free.
