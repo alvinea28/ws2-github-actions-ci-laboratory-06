@@ -1,0 +1,12 @@
+name: Lab checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    name: Validate learner code
+    uses: ./.github/workflows/validate.yml
+    with:
+      root: module

@@ -1,0 +1,141 @@
+{
+  "id": "06-actions-ci",
+  "title": "Laboratory 06 · GitHub Actions and reusable validation",
+  "number": 6,
+  "topics": [
+    "D2.1",
+    "D2.5"
+  ],
+  "duration": "75–105 minutes",
+  "description": "No earlier repository required. A complete module and workflow starters are included; all CI remains credential-free.",
+  "nextRepository": "alvinea28/ws2-azure-delivery-laboratory-07",
+  "completion": "The latest learner revision passed the reusable credential-free workflow. Promotion remains a design exercise: use a fresh plan and separate state; only Lab 7 can perform instructor-enabled dev delivery. Every laboratory is independent; the catalogue order is a learning recommendation, not a requirement to create or finish another repository.",
+  "steps": [
+    {
+      "id": "1",
+      "title": "Add push and PR validation",
+      "lesson": ".github/steps/01.md",
+      "requiresCommit": true,
+      "checks": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/lab-checks.yml",
+          "contains": [
+            "push:",
+            "pull_request:",
+            "contents: read",
+            "24.16.0",
+            "1.16.1"
+          ],
+          "notContains": [
+            "TODO",
+            "id-token: write",
+            "secrets.",
+            "secrets: inherit",
+            "pull_request_target:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Observe a failed check and repair the input",
+      "lesson": ".github/steps/02.md",
+      "requiresCommit": true,
+      "checks": [
+        {
+          "kind": "file",
+          "path": "exercise/ci-note.md",
+          "contains": [
+            "invalid CIDR",
+            "var.address_space",
+            "10.300.0.0/16",
+            "10.42.0.0/16"
+          ],
+          "notContains": [
+            "TODO"
+          ]
+        },
+        {
+          "kind": "workflow",
+          "file": "lab-checks.yml",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Call the typed reusable workflow",
+      "lesson": ".github/steps/03.md",
+      "requiresCommit": true,
+      "checks": [
+        {
+          "kind": "file",
+          "path": ".github/workflows/validate.yml",
+          "contains": [
+            "workflow_call:",
+            "root:",
+            "type: string",
+            "required: true",
+            "contents: read"
+          ],
+          "notContains": [
+            "TODO",
+            "id-token: write",
+            "secrets.",
+            "secrets: inherit",
+            "pull_request_target:"
+          ]
+        },
+        {
+          "kind": "file",
+          "path": ".github/workflows/lab-checks.yml",
+          "contains": [
+            "push:",
+            "pull_request:",
+            "uses: ./.github/workflows/validate.yml",
+            "contents: read"
+          ],
+          "pattern": "root:\\s*module\\b",
+          "notContains": [
+            "TODO",
+            "id-token: write",
+            "secrets.",
+            "secrets: inherit",
+            "pull_request_target:"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Explain safe promotion and finish CI",
+      "lesson": ".github/steps/04.md",
+      "requiresCommit": true,
+      "checks": [
+        {
+          "kind": "file",
+          "path": "exercise/promotion.md",
+          "contains": [
+            "fresh plan",
+            "separate state",
+            "dev-only"
+          ],
+          "notContains": [
+            "TODO"
+          ]
+        },
+        {
+          "kind": "workflow",
+          "file": "lab-checks.yml",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "beginnerSetup": true,
+  "sourceRepository": "alvinea28/ws2-github-actions-ci-laboratory-06",
+  "sourceBranch": "dev",
+  "independent": true,
+  "prerequisiteLabs": []
+}
