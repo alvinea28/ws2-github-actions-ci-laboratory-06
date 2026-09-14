@@ -1,0 +1,22 @@
+{
+  "capturedOn": "2026-09-14",
+  "exercisePreview": {
+    "kind": "Actual anonymous GitHub Exercise Preview viewport; zero participant progress",
+    "private": false,
+    "url": "https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06/issues/1",
+    "previewRun": "https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06/actions/runs/34879109867",
+    "capturedAt": "2026-09-14T19:07:24.867Z",
+    "sha256": "939f48abb7fdc79170b592a50c1b3a83aee99c3473f21b99829e1be5a7adb053"
+  },
+  "localValidation": {
+    "kind": "New local output-viewer capture of actual fresh commands; not terminal UI or a participant cycle",
+    "private": false,
+    "codeBaseRevision": "cd9fef4ba905d7ffa366b56430702ca421c2d1c6",
+    "controlledFilesSha256": "c8b8637c24900c1307111dce603f9d0b104b93f6448ca64b0b54182c88bcc400",
+    "nodePasses": 35,
+    "solvedLabPassed": true,
+    "capturedAt": "2026-09-14T19:07:25.210Z",
+    "sha256": "50e04df54f4075220bd8ddbe457de330c2d035737ec8a95cc9b3bb27c405dcbf"
+  },
+  "historicalSimulation": "Original private A/B records remain in the private evidence repository; no original-day per-step screenshots exist."
+}
