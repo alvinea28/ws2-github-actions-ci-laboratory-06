@@ -2,28 +2,27 @@
 
 **Public source template (not the clone URL after copying):** [alvinea28/ws2-github-actions-ci-laboratory-06](https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06) · **Recommended order:** 06 of 08 · **Time:** 75–105 minutes
 
-> [!NOTE]
-> **This laboratory is independent.** No earlier repository required. A complete module and workflow starters are included; all CI remains credential-free.
-> New to the tools? The complete [illustrated first-time setup](docs/start-here.md) is included here—no other lab is required.
+**Goal:** build push/PR checks, repair real red CI and reuse validation. **This lab is independent:** module, mocks and starters included; no earlier lab or Azure account.
 
-> [!IMPORTANT]
-> **Azure setup:** [enter your own tenant, subscription and existing RG](docs/azure-setup.md#1-find-the-three-values-before-opening-the-terminal) · [Azure CLI login and current RG check](docs/azure-setup.md#4-reuse-an-existing-login-or-sign-in-when-required). Account/RG reads are setup, not provisioning authorization. Local quality checks and PR jobs remain credential-free.
+## Start once
 
-## Start here — copy, clone, open and sign in
+1. **Account:** GitHub → **Sign up** (verify email) or sign in; accept any assigned organization invitation.
+2. **Install:** [Git, desktop VS Code and toolchain](docs/toolchain.md): Node **24.16.0**, Terraform **1.16.1**, pinned AzureRM **5.4.0**. Restart VS Code.
+3. **Copy:** create one **Private** copy below with **-laboratory-06** suffix; reuse an existing copy.
+4. **Clone/open:** from **your copy**, copy **Code → HTTPS**. VS Code: **Ctrl+Shift+P → Git: Clone** (macOS **Cmd**), paste **your own URL**, choose a parent folder, then **Open** the clone. Trust only it; Explorer must show the clone root.
+5. **Setup:** [Git authorship/Copilot account checks](docs/start-here.md); then **Terminal → New Terminal** at the clone root:
 
-**Before cloning:** if Git or desktop VS Code is not installed, complete [the official installation steps](docs/toolchain.md), restart VS Code, then continue below. If you have no GitHub account yet, choose **Sign up** on GitHub and verify your email as shown in [Start here](docs/start-here.md).
+```powershell
+node scripts/doctor.mjs
+```
 
-1. **Browser:** sign in to your intended personal GitHub account. If the instructor assigned an organization, accept its invitation using that personal account.
-2. **GitHub:** create your own **Private** copy below, retaining **-laboratory-06** at the end of its name. If you already made a copy, do not copy again.
-3. **Desktop VS Code:** press **Ctrl+Shift+P** (macOS **Cmd+Shift+P**) → **Git: Clone** → paste **your own copy's HTTPS URL**, not this public source URL. Complete the trusted browser sign-in with the correct account.
-4. **Open the clone:** choose a local parent folder, then **Open** the newly cloned repository. Trust only the known workshop copy. Explorer must show this repository, not a parent with multiple labs or a browser-only virtual workspace.
-5. **Accounts:** verify GitHub and **GitHub Copilot** sign-in/seat. Git commit name/email is not sign-in. Use [account and context screenshots](docs/copilot-guide.md) if anything is unclear.
-6. **Terminal → New Terminal:** follow [tool installation and version checks](docs/toolchain.md), configure local Git authorship, then run **node scripts/doctor.mjs**. It checks local readiness, not browser/Copilot authorization.
-7. **Exercise:** refresh your copy after 20–60 seconds and open its Exercise issue. Follow the current detailed task and [save → stage → commit → push guide](docs/git-workflow.md).
+**Why:** Node runs the read-only doctor, without flags; it cannot certify sign-in/seat. **Expected:** no errors; **stop** for [setup recovery](docs/troubleshooting.md).
+
+Open **your copy's Exercise**. **Save → stage → commit → push → refresh the same Exercise** ([Git guide](docs/git-workflow.md)). AgentAlvine updates it automatically; never edit progress.
 
 ![Microsoft reference: cloning from GitHub in VS Code](docs/images/vscode-clone-github.png)
 
-*REFERENCE — Microsoft documentation example, not your account/repository. [Image attribution](docs/images/NOTICE.md). Detailed clone steps are in [Start here](docs/start-here.md#clone-your-copy-into-desktop-vs-code).*
+*REFERENCE — Microsoft, CC BY 3.0 US; not your account/repository. [Attribution](docs/images/NOTICE.md).*
 
 <!-- AGENTALVINE:START -->
 ## Copy this exercise once
@@ -33,23 +32,14 @@
 Select the intended Owner, keep **Private**, leave **Include all branches** off, and create the copy. Its own AgentAlvine issue will appear automatically.
 <!-- AGENTALVINE:END -->
 
-## Full workshop review
+## Review and boundaries
 
-[Complete setup, all activities and simulation evidence](full-ws-content/README.md) · [Public source Exercise #1 — read-only instructor Preview](https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06/issues/1).
+[Complete lessons and historical A/B outcomes](full-ws-content/README.md) · [Read-only public Exercise preview](https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06/issues/1), not learner progress.
 
-The source preview stays at zero learner progress. Learners use the **Exercise link in their own private copy's README**; AgentAlvine validates real work and updates that same issue body, not a separate ticket per activity.
+**Additional hands-on:** [Defender DevOps: scan, inspect, repair and rescan](docs/defender-devops-hands-on.md). Requires separate Azure/connector authorization; not historical A/B proof, an automatic grade or deployment approval.
 
-## What is included and what remains external
+**Credential-free:** retain read-only permissions, action SHAs and mocks; no Azure/OIDC/state/secrets in PR validation. Never merge the deliberate red revision. Completion needs current caller CI, not deployment.
 
-- This copy has its own instructions, exercises, reference code and tests. The catalogue sequence builds concepts; there is no required earlier repository.
-- Git, VS Code, Node24.16.0 and Terraform1.16.1 are required. AzureRM5.4.0 is pinned; tests use mocks, not an Azure account.
-- Tool/setup instructions and a read-only doctor are provided locally.
-- No Azure credentials, state or deployment are needed for the offline laboratory.
+Optional [Azure inputs](docs/azure-setup.md#1-find-the-three-values-before-opening-the-terminal) · [login/RG check](docs/azure-setup.md#4-reuse-an-existing-login-or-sign-in-when-required) are preparation, not protected live approval. Lab 06 requires no merge.
 
-## Help without guessing
-
-[First-time setup](docs/start-here.md) · [Git actions](docs/git-workflow.md) · [Copilot accounts/context](docs/copilot-guide.md) · [Toolchain](docs/toolchain.md) · [Settings/Actions troubleshooting](docs/troubleshooting.md) · [Glossary](docs/glossary.md)
-
-Do not edit progress checkboxes or send manual evidence commands. AgentAlvine updates the same issue from real activity; a green checklist is not Azure authorization.
-
-[All eight numbered laboratories](https://github.com/alvinea28/ws2-workshop-catalogue) · [MIT code license](LICENSE) · [Screenshot licenses](docs/images/NOTICE.md)
+[All laboratories](https://github.com/alvinea28/ws2-workshop-catalogue) · [Copilot help](docs/copilot-guide.md) · [Glossary](docs/glossary.md) · [MIT license](LICENSE)

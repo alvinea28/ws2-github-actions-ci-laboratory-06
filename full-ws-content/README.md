@@ -13,22 +13,17 @@ Do not install completed workflows into the public starter merely to fix a link.
 
 [Repository landing](../README.md) · [Complete setup](00-start-here.md) · [Azure inputs and login](azure-setup.md) · [Simulation and verification](simulation.md)
 
-> [!IMPORTANT]
-> **Azure setup:** [enter your own tenant, subscription and existing RG](azure-setup.md#1-find-the-three-values-before-opening-the-terminal) · [Azure CLI login and current RG check](azure-setup.md#4-reuse-an-existing-login-or-sign-in-when-required). This complete guide covers read-only account/RG preparation, not provisioning authorization or new live evidence. Local quality checks and PR jobs remain credential-free.
+**Static review pack**, not another Exercise. Marked lessons match canonical text, rebasing only Markdown links outside code fences; complete examples and attribution remain intact.
 
-This pack exposes the complete setup and every activity in [the course manifest](../.github/agentalvine/course.json). It is a **static review copy**, not another exercise, bug-ticket list, or learner progress tracker. Lesson text is bounded by preservation markers; only Markdown relative links outside code fences are rebased. Commands, examples, and publisher attribution remain the lesson's own content.
+**Additional hands-on:** [Defender DevOps: scan, inspect, repair and rescan](defender-devops-hands-on.md), the full guide with rebased links. Separate Azure/connector authorization is required; this unexecuted source activity adds no historical A/B proof or automatic grade.
 
-## Learner route: one copy, one Exercise issue
+## Learner route: one copy, one Exercise
 
-1. Use the [complete setup guide](00-start-here.md) to create **one private copy**, clone its own URL, open that clone, and check tools and accounts. If the copy already exists, do not copy again.
-2. Open the **Exercise** link in **your private copy's README**. This is the live issue to follow, not the source preview below.
-3. Read the current activity in that issue. Make the required real edits, save, commit, and push; inspect the draft PR and actual Actions checks. Where a lesson requires review, it must be real review, not a checkbox or AI substitute.
-4. **AgentAlvine validates those actual events and updates the SAME issue body**, including progress, feedback, and the next activity. Refresh that issue rather than making a ticket for each activity.
-5. Actions implements AgentAlvine and the checks; it is **not a replacement for the issue-based learner experience**. Lab 06's completion gate does not require a merge or an Azure deployment.
+1. Complete [account/install/copy/clone/open setup](00-start-here.md) once; reuse your own copy and URL.
+2. Open **your copy's Exercise**. **Save → stage → commit → push → refresh the same Exercise** ([Git guide](../docs/git-workflow.md)); AgentAlvine updates it from real events.
+3. Keep the PR draft through real red → repaired green CI and nested validation. No merge/deployment needed; never fabricate runs or pre-fill success.
 
-Editing checkboxes never awards work and never authorizes Azure. Do not create evidence PRs, submit run IDs, or fabricate a red run, green run, or approval. The [catalogue](https://github.com/alvinea28/ws2-workshop-catalogue) is only a directory of independent laboratories.
-
-**Recovery only if the Exercise is missing:** first inspect startup and [troubleshooting](../docs/troubleshooting.md#agentalvine-or-the-exercise-is-missing). In the actual private copy, use **Actions → AgentAlvine → Run workflow → Check progress**, selecting that copy's **actual default branch** (normally `dev`). Then open the issue from its README. Do **not** choose **Preview** for a learner, invent an issue, or widen permissions. An existing issue with pending work needs its real prerequisites, not a forced recovery run.
+**Stop/recover:** [missing Exercise](../docs/troubleshooting.md#agentalvine-or-the-exercise-is-missing); never widen permissions or fabricate progress. PR checks stay credential-free. Optional [Azure inputs](azure-setup.md#1-find-the-three-values-before-opening-the-terminal)/[login](azure-setup.md#4-reuse-an-existing-login-or-sign-in-when-required) do not replace protected live approvals.
 
 ## Complete activity sequence and original A/B status
 
@@ -46,12 +41,12 @@ Both original cycles were run on **2026-09-08**. “Verified” refers to the co
 
 ## Live public source preview — read-only, not learner progress
 
-Open [public source Exercise #1](https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06/issues/1) to review the real instructor **Preview**. The **2026-09-14 read-only GitHub observation** confirmed a successful Preview workflow and **step 0, with 0/4 participant progress**. That source issue never becomes a learner's progress record; after copying, follow the Exercise link in your own README.
+The **2026-09-14 observation** confirmed [public source Exercise #1](https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06/issues/1) in successful instructor Preview, **step 0 (0/4)**—not learner progress or a new simulation.
 
 ![Actual Lab 06 public source Exercise preview — 2026-09-14, not a completed simulation](images/exercise-preview.png)
 
-*Captured on 2026-09-14 from the actual public GitHub Exercise #1: read-only instructor Preview, step 0 (0/4). [images/provenance.json](images/provenance.json) records the PNG SHA-256 and exact capture timestamp. This current source Preview is not a September 8 participant screenshot or either private 4/4 outcome.*
+*Actual public Preview capture, 2026-09-14; not a September 8 participant screenshot. [images/provenance.json](images/provenance.json) retains its timestamp and PNG SHA-256.*
 
-See the separate [fresh local verification results](simulation.md#fresh-2026-09-14-verified-results) for command-output evidence, not participant progress.
+[2026-09-14 local verification](simulation.md#fresh-2026-09-14-verified-results) is separate from learner progress. [Private Lab 06 originals](https://github.com/alvine-aurelio-org/ws2-public-rebuild-20260908-evidence/blob/dev/full-ws-content/lab-06/README.md) retain red/green and nested-run records; screenshots do not replace them.
 
-Original private simulation records, immutable revisions, and actual Actions evidence are linked through the [private Lab 06 review](https://github.com/alvine-aurelio-org/ws2-public-rebuild-20260908-evidence/blob/dev/full-ws-content/lab-06/README.md). Screenshots supplement those records; they do not replace them.
+[Course manifest](../.github/agentalvine/course.json) · [Independent laboratory catalogue](https://github.com/alvinea28/ws2-workshop-catalogue)

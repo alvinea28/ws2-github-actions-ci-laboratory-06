@@ -6,75 +6,45 @@
 > **Review copy, not a second progress tracker.** The complete canonical lesson follows. Learners follow the live **Exercise issue in their own private copy**, opened from that copy's README; AgentAlvine updates the same issue body. The public source preview awards no learner progress.
 
 <!-- FULL-WS-LESSON:START -->
-> [!IMPORTANT]
-> **Already reading this in an Exercise issue or your own private copy? The copy is already created.** Do not create another repository. Skip only the copy-creation substeps below; continue with cloning/opening **this existing copy**, account checks and the first edit. If Git or desktop VS Code is not installed, use [the installation guide](../docs/toolchain.md) before cloning.
-
 # Lab 06 · Step 1 — Add credential-free push and PR checks
 
-> [!IMPORTANT]
-> Start here independently. The number recommends an order; no Lab 05 release or earlier repository is needed. This private copy includes a complete module, security child, locked provider, mock tests, and workflow starters. Nothing in Lab 06 deploys Azure.
+**Goal:** add actual push/PR checks and open a draft PR. This independent lab supplies its complete module, security child, locks, mocks and starters; no earlier release or Azure account is needed.
 
-| Before you start | This step |
+| Working context | Value |
 | --- | --- |
-| Goal | Add real push/PR validation and open a draft PR in your own copy |
-| Starting branch | Your actual default branch, normally `dev` |
-| Working branch | `lab/ci` for all four steps |
-| Read / copy | [exercises/lab-checks.yml.example](../exercises/lab-checks.yml.example) |
+| Branch | Updated actual default, normally `dev` → `lab/ci` for all four steps |
+| Starter | [exercises/lab-checks.yml.example](../exercises/lab-checks.yml.example) |
 | Create | [.github/workflows/lab-checks.yml](README.md#learner-created-workflows) |
-| Supplied code | [module/main.tf](../module/main.tf), [module/tests/network.tftest.hcl](../module/tests/network.tftest.hcl), [scripts/check-learner.mjs](../scripts/check-learner.mjs) |
-| Tools | Node.js **24.16.0**, Terraform **1.16.1**, AzureRM **5.4.0**; mocks only |
+| Inspect | [module/main.tf](../module/main.tf), [module/tests/network.tftest.hcl](../module/tests/network.tftest.hcl), [scripts/check-learner.mjs](../scripts/check-learner.mjs) |
+| Tools | Node **24.16.0**, Terraform **1.16.1**, AzureRM **5.4.0**; mocks only |
 
-## 1. Make your own private copy in the browser
+```mermaid
+flowchart LR
+  A["Push or PR"] --> B["Read-only runner"]
+  B --> C["Format and validate"]
+  C --> D["Provider mocks"]
+  D --> E["Current-SHA result"]
+```
 
-1. Open GitHub and check your personal username in the profile-picture menu. Use the instructor-invited account, accepting any invitation first.
-2. Open [the public Lab 06 template](https://github.com/alvinea28/ws2-github-actions-ci-laboratory-06).
-3. Select **COPY EXERCISE**, or **Use this template** → **Create a new repository**.
-4. Choose your own account or the instructor-assigned organization in **Owner**; enter a unique name ending in `laboratory-06`.
-5. Select **Private**, leave **Include all branches** unchecked unless directed otherwise, and select **Create repository**.
-6. Confirm the new owner/name and **Private** badge. This is your working copy, not the public template, a fork, or a ZIP download.
-7. Refresh once materialization finishes; open the **Exercise** link or **Issues** → the active **AgentAlvine** issue. Its body is the progress display.
+Flow: push/PR → read-only runner → format/schema checks → mocks → current-revision result. Failure stops validation; success does not authorize deployment.
 
-## 2. Clone and open this repository, not its parent
+## Do 1 — Open your copy and check readiness
 
-1. In your copy select **Code** → green **Code** → **HTTPS** and copy its own credential-free clone URL.
-2. In desktop VS Code press **Ctrl+Shift+P** → **Git: Clone**, paste that URL, and press **Enter**. If using **Clone from GitHub**, choose your own private copy.
-3. If authorization appears, select **Allow** only for the recognized request you initiated. Check the account on GitHub's browser authorization page before approving VS Code or Git Credential Manager.
-4. Switch to the invited personal account if necessary, then authorize and return with **Open Visual Studio Code**. Never paste a password or token into a terminal or Chat.
-5. Choose a local **parent folder** as **Repository Destination**; after Git creates the copy's child folder, select **Open**.
-6. Trust only this known repository at the **Workspace Trust** prompt, not every folder beneath the parent.
-7. Check **Explorer** shows this Lab 06 clone as the root. It must not be the parent containing several labs, an extracted ZIP, or `github.dev`.
-8. If wrong, select **File** → **Open Folder...** and choose this clone itself, preferably in its own window.
-
-![Microsoft reference showing the GitHub sign-in permission prompt](../docs/images/vscode-github-signin.png)
-
-*REFERENCE — Microsoft publisher example, CC BY 3.0 US. It illustrates an authorization prompt, not proof of your sign-in; check your own account and copy. [Sources and attribution](../docs/images/NOTICE.md).*
-
-## 3. Check Copilot and the toolchain
-
-1. Open VS Code **Accounts** → **Sign in with GitHub to use GitHub Copilot**, if offered, and complete the trusted browser flow with your personal workshop account.
-2. Open **Accounts** → **Manage Extension Account Preferences...** and select that account for Copilot. Check its status and confirm the assigned **Copilot seat** with the instructor.
-3. Configure repository-local Git author name/email using [start-here.md](../docs/start-here.md). Authorship, browser login, Git credentials, and Copilot access are separate checks.
-4. Select **Terminal** → **New Terminal**, confirm this clone's root in the prompt, and run:
+Already in your copy or its Exercise? **Do not copy again.** Otherwise use [one-time account/install/copy/clone setup](../docs/start-here.md). Open your own HTTPS clone in desktop VS Code, not the source template or parent folder. Check Git authorship and Copilot account/seat separately. In **Terminal → New Terminal** at the clone root:
 
 ```powershell
 node scripts/doctor.mjs
 ```
 
-5. Read every result. For a missing doctor, wrong version, or missing tool, follow [toolchain.md](../docs/toolchain.md) or ask the instructor; do not generate a replacement or install Azure tools.
+**Why:** Node runs the read-only readiness script, with no flags; local tools/copy checks do not prove browser login, push rights, Copilot entitlement or Azure readiness. **Expected:** no unresolved errors. **Stop** on missing tools/wrong root and use [toolchain help](../docs/toolchain.md).
 
-The read-only doctor does not certify browser authentication, repository write access, a Copilot seat, or cloud authorization. Use **Cmd** in place of **Ctrl** on macOS; Linux uses **Ctrl**.
+![Microsoft reference showing the GitHub sign-in permission prompt](../docs/images/vscode-github-signin.png)
 
-## 4. Create the branch and copy the actual starter
+*REFERENCE — Microsoft publisher example, CC BY 3.0 US; not proof of your sign-in. [Sources and attribution](../docs/images/NOTICE.md).*
 
-1. In GitHub **Code** → branch dropdown, identify the actual default branch, normally `dev`.
-2. In VS Code **Source Control**, confirm a clean working tree; select that default branch in the status bar and choose **...** → **Pull**.
-3. Press **Ctrl+Shift+P** → **Git: Create Branch...**; enter `lab/ci` and confirm the status-bar branch.
-4. Press **Ctrl+P**, enter `exercises/lab-checks.yml.example`, and open the supplied starter.
-5. Select its full contents with **Ctrl+A**, then **Ctrl+C**. Do not ask Copilot to generate a different workflow.
-6. In **Explorer**, select this clone's root → **New File**, enter `.github/workflows/lab-checks.yml`, and paste with **Ctrl+V**. If it already exists, open it with **Ctrl+P** and inspect it before replacing only the intended starter content.
-7. Press **Ctrl+S**. The filename must end in `.yml`, not `.example` or an accidental extra extension.
+## Do 2 — Create the branch and complete workflow
 
-Keep these real starter declarations:
+Follow [shared pull/branch steps](../docs/git-workflow.md) to create `lab/ci`. Copy the **whole starter** into the listed destination using **Explorer → New File**; inspect an existing destination before replacing it. Preserve this complete workflow:
 
 ```yaml
 name: Lab checks
@@ -83,58 +53,63 @@ on:
   pull_request:
 permissions:
   contents: read
+jobs:
+  validate:
+    name: Validate learner code
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.16.0
+      - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: 1.16.1
+          terraform_wrapper: false
+      - run: node scripts/check-learner.mjs
 ```
 
-## 5. Read the job before running it
-
-| Workflow element | What to identify |
+| Element / command | Why it is here |
 | --- | --- |
-| `push` / `pull_request` | Two events that validate your branch and PR changes |
-| `validate` | The job whose display name is **Validate learner code** |
-| `runs-on: ubuntu-24.04` | A GitHub-hosted unprivileged runner, not a trusted private-state runner |
-| Checkout | Preserve the full supplied action SHA and `persist-credentials: false` |
-| Node / Terraform setup | Preserve full action SHAs, **24.16.0**, **1.16.1**, and `terraform_wrapper: false` |
-| Learner helper | Runs from the repository root and validates the supplied local module with mocks |
+| `push`, `pull_request` | Validate branch pushes and PR changes |
+| `contents: read`, `ubuntu-24.04` | Read-only repository token on a GitHub-hosted runner |
+| Full `uses` SHAs | Pin action code; do not replace them with movable tags |
+| `persist-credentials: false` | Do not retain checkout authentication for later Git commands |
+| `node-version`, `terraform_version` | Select the exact supplied tools |
+| `terraform_wrapper: false` | Use Terraform directly so the helper receives its actual JSON/output |
+| `node scripts/check-learner.mjs` | Run the JavaScript checker from the repository root, with no flags |
 
-The helper checks formatting, initializes with the backend disabled and the provider lock read-only, validates, and actually executes tests.
-Do not add Azure login, `id-token: write`, `secrets.`, `secrets: inherit`, `pull_request_target:`, a private runner, remote state, or blanket token permissions.
-Do not replace full action SHAs with mutable version tags.
+No Azure login/OIDC/state, `id-token: write`, `secrets.`, `secrets: inherit`, `pull_request_target:`, private runner or broader token permissions belong in PR validation.
 
-1. From the root terminal run the same approved learner route:
+## Do 3 — Save and run the same local check
 
 ```powershell
 node scripts/check-learner.mjs
 ```
 
-2. Confirm executed passing mock cases, not zero/skipped tests. The supplied provider may download; that is not Azure access.
-3. In Copilot **Chat** → **Ask**, attach the starter and request a read-only explanation of events, job order, working directory, and credential boundary. Do not authorize edits or cloud tools.
+**Why:** Node runs the same helper locally, from the clone root, with no flags. It removes cloud credential variables from Terraform's environment and requires mock-only plan tests. Its internal Terraform operations are:
 
-## 6. Commit, publish, and open the draft PR
+| Internal command/option | Meaning |
+| --- | --- |
+| `-chdir=module` | Select the supplied module root, not arbitrary caller input |
+| `fmt -check -recursive` | Check formatting without rewriting; include nested directories |
+| `init -backend=false -lockfile=readonly -input=false -no-color` | Prepare dependencies without backend access, lock changes, prompts or colour |
+| `validate -no-color` | Validate configuration/schema with plain-text diagnostics |
+| `test -json -no-color` | Execute mocks and parse machine-readable results, without colour |
 
-1. Open **Source Control**; select the workflow under **Changes** and inspect its full diff.
-2. Select **+** to stage only that workflow, inspect **Staged Changes**, enter `lab: add credential-free CI`, and select **Commit**.
-3. Select **Publish Branch**, choosing your copy's existing `origin`. Later corrections use **...** → **Push**, not a new repository publication or force-push.
-4. Refresh **Code**, choose `lab/ci`, and open its newest commit to verify your file and SHA reached your copy.
-5. Open **Actions** → **Lab checks** → that branch/SHA's run → **Validate learner code**. Inspect the actual helper result.
-6. Open **Pull requests** → **New pull request**; confirm both repository selectors name your own private copy.
-7. Set **base** to the actual default, normally `dev`, and **compare** to `lab/ci`; review the diff.
-8. Enter **Build credential-free CI** as the title. Describe the supplied module checks and note that a deliberate invalid-CIDR failure will be repaired before any merge.
-9. Open the arrow beside **Create pull request** and select **Create draft pull request**. Confirm the PR displays **Draft**.
-10. Use the PR's **Checks** tab for current-head feedback. Leave this PR a draft while working through the red-to-green exercise; do not merge the intentional failure.
-11. Refresh the active **Exercise** issue body. AgentAlvine checks the pushed workflow's triggers, tool pins, read-only permissions, and forbidden credential paths.
+**Expected:** required cases execute and pass. Provider downloads may need internet; no Azure access occurs. **Stop** on formatting/validation errors, credentials, or zero/skipped/failed/errored tests; do not weaken checks. Copilot **Ask** can explain the workflow read-only, not replace verification.
 
-## Expected result
+## Do 4 — Push and open the draft PR
 
-**Expected result:** a published `lab/ci` branch, real **Lab checks** run, and same-copy draft PR. File checks advance the first task; the later steps require successful current-revision CI.
+Review the workflow-only diff. **Save → stage → commit → push → refresh the same Exercise** using the [Git guide](../docs/git-workflow.md); message: `lab: add credential-free CI`. First push: **Publish Branch → existing origin**.
 
-## Stuck?
+Inspect **Actions → Lab checks → Validate learner code** at the newest `lab/ci` SHA. Open a **same-copy** PR, base actual default → compare `lab/ci`, titled **Build credential-free CI**; select **Create draft pull request**. Explain that the deliberate failure comes next; keep the PR draft and never merge that red revision.
 
-- Workflow missing: inspect the exact destination path and newest pushed branch, then refresh **Actions**.
-- YAML error: keep spaces and indentation from the starter; the diagnostic is not the planned invalid-CIDR experiment.
-- Policy or account blocked: follow [troubleshooting.md](../docs/troubleshooting.md); do not enable all actions, write tokens, secrets, or PR-target execution.
-- AgentAlvine pending: inspect its own workflow and refresh the existing issue body; do not add a manual check command, run IDs, or evidence PR.
+**Expected:** published workflow, actual run and draft PR. AgentAlvine checks this step's workflow files; later tasks require successful current CI.
 
-**Full beginner help:** [start-here.md](../docs/start-here.md) · [git-workflow.md](../docs/git-workflow.md) · [copilot-guide.md](../docs/copilot-guide.md) · [toolchain.md](../docs/toolchain.md) · [troubleshooting.md](../docs/troubleshooting.md).
+**Stop/recover:** check destination/branch for missing runs; fix YAML indentation for parse errors. For policy blocks or a missing/stale Exercise, inspect **AgentAlvine** and [troubleshooting](../docs/troubleshooting.md); never widen permissions or fabricate progress.
 <!-- FULL-WS-LESSON:END -->
 
 ## Original Cycle A/B outcome — 2026-09-08
