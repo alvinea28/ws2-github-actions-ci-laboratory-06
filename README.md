@@ -6,6 +6,9 @@
 
 ## Start once
 
+**Windows x64:** [prepare all tools and VS Code extensions in one go](https://github.com/alvinea28/ws2-workshop-catalogue/blob/dev/docs/windows-setup.md#2-paste-this-one-command)
+before cloning. Run once for all eight labs; after READY/restart, skip manual installs below.
+
 1. **Account:** GitHub → **Sign up** (verify email) or sign in; accept any assigned organization invitation.
 2. **Install:** [Git, desktop VS Code and toolchain](docs/toolchain.md): Node **24.16.0**, Terraform **1.16.1**, pinned AzureRM **5.4.0**. Restart VS Code.
 3. **Copy:** create one **Private** copy below with **-laboratory-06** suffix; reuse an existing copy.
